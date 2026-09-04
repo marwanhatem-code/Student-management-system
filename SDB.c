@@ -16,6 +16,16 @@ bool SDB_IsFull(){
      return false;
 }
 
+bool SDB_IsIdExist(uint32 id){
+
+    for(uint32 i = 0 ; i < counter ; i++){
+        if(dataBase[i].Student_ID == id){
+            return true;
+    }
+} 
+return false;
+}
+
 bool SDB_AddEntry(){
 
     if(SDB_IsFull()){
@@ -91,7 +101,64 @@ do {
     }
 }
 
+void SDB_DeleteEntry(uint32 id){
+    bool found = false;
+    for(uint32 i = 0 ; i < counter ; i++){
+        if(dataBase[i].Student_ID == id){
+            found = true;
+            for (uint32 j = i ; j < counter - 1 ; j++){
+            dataBase[j] = dataBase[j+1];
+            }
+            break;
+    }
+}   
+   if(found){
+    printf("Student deleted sucessfully!");
+    counter--;
+    return;
+   }
 
+   else{
+     printf("Student not found!");
+    return ;
+   }
+}
+
+bool SDB_ReadEntry(uint32 id){
+    bool found = false;
+    uint32 index;
+    for(uint32 i = 0 ; i < counter ; i++){
+        if(dataBase[i].Student_ID == id){
+            found = true;
+            index = i ;
+            break;
+    }
+}   
+    if(found){
+        printf("Student data:\n");
+        printf("Student ID: %d\n",dataBase[index].Student_ID);
+        printf("Student Year: %d\n",dataBase[index].Student_year);
+        printf("Student Course 1 ID: %d\n",dataBase[index].Course1_ID);
+        printf("Student Course 1 grade: %d\n",dataBase[index].Course1_grade);
+        printf("Student Course 2 ID: %d\n",dataBase[index].Course2_ID);
+        printf("Student Course 2 grade: %d\n",dataBase[index].Course2_grade);
+        printf("Student Course 3 ID: %d\n",dataBase[index].Course3_ID);
+        printf("Student Course 3 grade: %d\n",dataBase[index].Course3_grade);
+        return found;
+    }
+    else{
+        printf("Student ID not found!");
+        return found;
+    }
+}
+
+void  SDB_GetList(uint8 *count, uint32 *list){
+    *count = counter;
+    for(uint32 i = 0 ; i < counter ; i++){
+        *list = dataBase[i].Student_ID;
+        list++;
+    }
+}
 
 
 

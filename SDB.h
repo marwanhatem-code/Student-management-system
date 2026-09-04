@@ -17,5 +17,5 @@ bool  SDB_IsFull();
 bool  SDB_AddEntry();
 bool  SDB_ReadEntry(uint32 id);
 bool  SDB_IsIdExist(uint32 id);
-void  SDB_DeletEntry(uint32 id);
+void  SDB_DeleteEntry(uint32 id);
 void  SDB_GetList(uint8 *count, uint32 *list);
