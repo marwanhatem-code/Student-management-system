@@ -55,7 +55,7 @@ do {
 do {
         printf("Please enter student Course 1 Grade:\n");
         scanf("%d",&dataBase[counter].Course1_grade);
-} while (dataBase[counter].Course1_grade < 0);  
+} while (dataBase[counter].Course1_grade < 0 || dataBase[counter].Course1_grade > 100);  
 
 do {
         printf("Please enter student Course 2 ID:\n");
@@ -69,7 +69,7 @@ do {
 do {
         printf("Please enter student Course 2 Grade:\n");
         scanf("%d",&dataBase[counter].Course2_grade);
-} while (dataBase[counter].Course2_grade < 0);
+} while (dataBase[counter].Course2_grade < 0 || dataBase[counter].Course2_grade > 100);
 
 do {
         printf("Please enter student Course 3 ID:\n");
@@ -83,11 +83,15 @@ do {
 do {
         printf("Please enter student Course 3 Grade:\n");
         scanf("%d",&dataBase[counter].Course3_grade);
-} while (dataBase[counter].Course3_grade < 0);
+} while (dataBase[counter].Course3_grade < 0 || dataBase[counter].Course3_grade > 100);
 
         printf("student sucessfully added!");
+        counter++ ;
         return true;
     }
-
-
 }
+
+
+
+
+
