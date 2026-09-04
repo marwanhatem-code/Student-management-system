@@ -13,9 +13,9 @@ uint32 Course3_grade;
 
 
 uint8 SDB_GetUsedSize();
-bool SDB_IsFull();
-bool SDB_AddEntry();
-bool SDB_ReadEntry(uint32 id);
-bool SDB_IsIdExist(uint32 id);
-void SDB_DeletEntry(uint32 id);
-void SDB_GetList(uint8 *count, uint32 *list);
+bool  SDB_IsFull();
+bool  SDB_AddEntry();
+bool  SDB_ReadEntry(uint32 id);
+bool  SDB_IsIdExist(uint32 id);
+void  SDB_DeletEntry(uint32 id);
+void  SDB_GetList(uint8 *count, uint32 *list);
