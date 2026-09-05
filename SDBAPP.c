@@ -3,14 +3,14 @@
 #include <stdio.h>
 
 
-bool exit = false;
+bool exitProgram = false;
 
 
 
 void SDB_APP(){
     uint8 choice;
     do{
-        printf("            Student Management System           \n"
+        printf("\n            Student Management System           \n"
             "1. Add Entry:\n"
             "2. Get used size:\n"
             "3. Read student data:\n"
@@ -23,7 +23,7 @@ void SDB_APP(){
         scanf("%d",&choice);
         SDB_action(choice);
 
-    }while(exit == false);
+    }while(exitProgram == false);
 }
 
 void SDB_action(uint8 choice){
@@ -44,15 +44,17 @@ switch(choice){
     SDB_ReadEntry(id);
         break;
     case 4:
+    {
     uint8 count;
     uint32 list[10];
     SDB_GetList(&count, list);
     for(uint32 i = 0 ; i < count ; i++){
-        printf("        Student %d | ID: %d     \n", i, list[i]);
+        printf("        Student %d | ID: %d     \n", i+1, list[i]);
     }
     printf("--------------------------------------\n"
         "Total Students: %d\n", count);
         break;
+    }
     case 5:
     printf("Please Enter Student ID: ");
     scanf("%d",&id);
@@ -69,7 +71,7 @@ switch(choice){
     else printf("Databse is not full !\n");
     break;
     case 0:
-    exit = true ;
+    exitProgram = true ;
     break;
     default:
     printf("Please enter a valid choice!\n");
