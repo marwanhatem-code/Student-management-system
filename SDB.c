@@ -27,7 +27,7 @@ bool SDB_IsFull(){
 
 /*
  - Checks whether a student with the specified ID exists in the database.
- - Returns true if the ID is found and false otherwise.
+  Returns true if the ID is found and false otherwise.
  */
 bool SDB_IsIdExist(uint32 id){
 
@@ -48,14 +48,26 @@ return false;
  */
 bool SDB_AddEntry(){
 
+    int32 input = 0 ;
+
 /* Prevent adding a student when the database has reached its capacity. */
     if(SDB_IsFull()){
     printf("Faild To Add Student (Data Base Is Full!)\n");
     return false;
     }
     else{
+
+        /* do-while validation loop for invalid inputs. */
+        do{
         printf("Please enter student ID:\n");
-        scanf("%d",&dataBase[counter].Student_ID);
+        scanf("%d",&input);
+
+        if(input <= 0){
+        printf("please enter a valid ID!\n\n");
+        }
+
+        }while(input <= 0);
+        dataBase[counter].Student_ID = input ;
 
         /* Student IDs must be unique within the database. */
         if (SDB_IsIdExist(dataBase[counter].Student_ID)){
@@ -65,68 +77,75 @@ bool SDB_AddEntry(){
         
         do {
         printf("Please enter student year:\n");
-        scanf("%d",&dataBase[counter].Student_year);
-        if (dataBase[counter].Student_year <= 0)
+        scanf("%d",&input);
+        if (input <= 0)
         {
-            printf("Please enter a valid year!\n");
+            printf("Please enter a valid year!\n\n");
         }
-        } while(dataBase[counter].Student_year <= 0);
+        } while(input <= 0);
+        dataBase[counter].Student_year = input ;
            
 /* do-while validation loop for invalid inputs. */
 do {
         printf("Please enter student Course 1 ID:\n");
-        scanf("%d",&dataBase[counter].Course1_ID);
-        if (dataBase[counter].Course1_ID<=0)
+        scanf("%d",&input);
+        if (input<=0)
         {
-            printf("please enter a valid course ID!\n");
+            printf("please enter a valid course ID!\n\n");
         }
         
-} while(dataBase[counter].Course1_ID <= 0);
+} while(input <= 0);
+dataBase[counter].Course1_ID = input;
 
 
 do {
         printf("Please enter student Course 1 Grade:\n");
-        scanf("%d",&dataBase[counter].Course1_grade);
-        if(dataBase[counter].Course1_grade < 0 || dataBase[counter].Course1_grade > 100){
-            printf("please enter a valid course grade!\n");
+        scanf("%d",&input);
+        if(input < 0 || input > 100){
+            printf("please enter a valid course grade!\n\n");
         }
-} while (dataBase[counter].Course1_grade < 0 || dataBase[counter].Course1_grade > 100);  
+} while (input < 0 || input > 100);  
+dataBase[counter].Course1_grade = input ; 
 
 /* Repeat the same validation process for Course 2. */
 do {
         printf("Please enter student Course 2 ID:\n");
-        scanf("%d",&dataBase[counter].Course2_ID);
-        if (dataBase[counter].Course2_ID<=0)
+        scanf("%d",&input);
+        if (input<=0)
         {
-            printf("please enter a valid course ID!\n");
+            printf("please enter a valid course ID!\n\n");
         }
-} while(dataBase[counter].Course2_ID <= 0);
+} while(input <= 0);
+dataBase[counter].Course2_ID = input ;
 
 do {
         printf("Please enter student Course 2 Grade:\n");
-        scanf("%d",&dataBase[counter].Course2_grade);
-        if(dataBase[counter].Course2_grade < 0 || dataBase[counter].Course2_grade > 100){
-            printf("please enter a valid course grade!\n");
+        scanf("%d",&input);
+        if(input < 0 || input > 100){
+            printf("please enter a valid course grade!\n\n");
         }
-} while (dataBase[counter].Course2_grade < 0 || dataBase[counter].Course2_grade > 100);
+} while (input < 0 || input > 100);
+dataBase[counter].Course2_grade = input ; 
 
 /* Repeat the same validation process for Course 3. */
 do {
         printf("Please enter student Course 3 ID:\n");
-        scanf("%d",&dataBase[counter].Course3_ID);
-        if (dataBase[counter].Course3_ID<=0)
+        scanf("%d",&input);
+        if (input<=0)
         {
-            printf("please enter a valid course ID!\n");
+            printf("please enter a valid course ID!\n\n");
         }
-} while(dataBase[counter].Course3_ID <= 0);
+} while(input <= 0);
+dataBase[counter].Course3_ID = input ;
 
 do {
         printf("Please enter student Course 3 Grade:\n");
-        scanf("%d",&dataBase[counter].Course3_grade);
-        if(dataBase[counter].Course3_grade < 0 || dataBase[counter].Course3_grade > 100){
-            printf("please enter a valid course grade!\n");
+        scanf("%d",&input);
+        if(input < 0 || input > 100){
+            printf("please enter a valid course grade!\n\n");
         }
-} while (dataBase[counter].Course3_grade < 0 || dataBase[counter].Course3_grade > 100);
+} while (input < 0 || input > 100);
+dataBase[counter].Course3_grade = input ;
 
         printf("student sucessfully added!\n");
 
@@ -186,14 +205,14 @@ bool SDB_ReadEntry(uint32 id){
 }   
     if(found){
         printf("Student data:\n");
-        printf("Student ID: %d\n",dataBase[index].Student_ID);
-        printf("Student Year: %d\n",dataBase[index].Student_year);
-        printf("Student Course 1 ID: %d\n",dataBase[index].Course1_ID);
-        printf("Student Course 1 grade: %d\n",dataBase[index].Course1_grade);
-        printf("Student Course 2 ID: %d\n",dataBase[index].Course2_ID);
-        printf("Student Course 2 grade: %d\n",dataBase[index].Course2_grade);
-        printf("Student Course 3 ID: %d\n",dataBase[index].Course3_ID);
-        printf("Student Course 3 grade: %d\n",dataBase[index].Course3_grade);
+        printf("Student ID: %u\n",dataBase[index].Student_ID);
+        printf("Student Year: %u\n",dataBase[index].Student_year);
+        printf("Student Course 1 ID: %u\n",dataBase[index].Course1_ID);
+        printf("Student Course 1 grade: %u\n",dataBase[index].Course1_grade);
+        printf("Student Course 2 ID: %u\n",dataBase[index].Course2_ID);
+        printf("Student Course 2 grade: %u\n",dataBase[index].Course2_grade);
+        printf("Student Course 3 ID: %u\n",dataBase[index].Course3_ID);
+        printf("Student Course 3 grade: %u\n",dataBase[index].Course3_grade);
         return found;
     }
     else{
