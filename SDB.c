@@ -1,13 +1,22 @@
 #include "SDB.h"
 #include "stdio.h"
 
+// Maximum number of students supported by the database.
 student dataBase[10];
+
+//Tracks the number of currently stored students.
 uint8   counter = 0;
 
+
+// Returns the number of students currently stored in the database. 
 uint8 SDB_GetUsedSize(){
     return counter;
 }
 
+/*
+ - Checks whether the database has reached its maximum capacity.
+ - Returns true if all available entries are occupied; otherwise returns false.
+ */
 bool SDB_IsFull(){
     if(counter == 10)
      return true;
@@ -16,6 +25,10 @@ bool SDB_IsFull(){
      return false;
 }
 
+/*
+ - Checks whether a student with the specified ID exists in the database.
+ - Returns true if the ID is found and false otherwise.
+ */
 bool SDB_IsIdExist(uint32 id){
 
     for(uint32 i = 0 ; i < counter ; i++){
@@ -26,8 +39,16 @@ bool SDB_IsIdExist(uint32 id){
 return false;
 }
 
+
+/*
+ - Adds a new student to the database.
+ - The function checks that the database is not full and that the student ID
+   is unique before collecting and storing the student's information.
+ - Returns true when the student is successfully added, otherwise false.
+ */
 bool SDB_AddEntry(){
 
+/* Prevent adding a student when the database has reached its capacity. */
     if(SDB_IsFull()){
     printf("Faild To Add Student (Data Base Is Full!)\n");
     return false;
@@ -36,6 +57,7 @@ bool SDB_AddEntry(){
         printf("Please enter student ID:\n");
         scanf("%d",&dataBase[counter].Student_ID);
 
+        /* Student IDs must be unique within the database. */
         if (SDB_IsIdExist(dataBase[counter].Student_ID)){
              printf("Faild To Add Student (Duplicate ID!)\n");
              return false;
@@ -50,7 +72,7 @@ bool SDB_AddEntry(){
         }
         } while(dataBase[counter].Student_year <= 0);
            
-
+/* do-while validation loop for invalid inputs. */
 do {
         printf("Please enter student Course 1 ID:\n");
         scanf("%d",&dataBase[counter].Course1_ID);
@@ -70,6 +92,7 @@ do {
         }
 } while (dataBase[counter].Course1_grade < 0 || dataBase[counter].Course1_grade > 100);  
 
+/* Repeat the same validation process for Course 2. */
 do {
         printf("Please enter student Course 2 ID:\n");
         scanf("%d",&dataBase[counter].Course2_ID);
@@ -87,6 +110,7 @@ do {
         }
 } while (dataBase[counter].Course2_grade < 0 || dataBase[counter].Course2_grade > 100);
 
+/* Repeat the same validation process for Course 3. */
 do {
         printf("Please enter student Course 3 ID:\n");
         scanf("%d",&dataBase[counter].Course3_ID);
@@ -105,16 +129,27 @@ do {
 } while (dataBase[counter].Course3_grade < 0 || dataBase[counter].Course3_grade > 100);
 
         printf("student sucessfully added!\n");
+
+        /* Increase the number of stored students after a successful addition. */
         counter++ ;
         return true;
     }
 }
 
+/*
+ - Removes a student from the database using their student ID.
+ - When the student is found, subsequent entries are shifted left to fill
+   the empty position and the database size is decreased.
+ */
 void SDB_DeleteEntry(uint32 id){
     bool found = false;
+
+    /* for loop to find the ID to be delted from database. */
     for(uint32 i = 0 ; i < counter ; i++){
         if(dataBase[i].Student_ID == id){
             found = true;
+
+            /* for loop to shift left all entries to fill the deleted position. */
             for (uint32 j = i ; j < counter - 1 ; j++){
             dataBase[j] = dataBase[j+1];
             }
@@ -123,6 +158,8 @@ void SDB_DeleteEntry(uint32 id){
 }   
    if(found){
     printf("Student deleted sucessfully!\n");
+
+    /* Update the number of valid entries after deletion. */
     counter--;
     return;
    }
@@ -133,6 +170,10 @@ void SDB_DeleteEntry(uint32 id){
    }
 }
 
+/*
+ - Searches for a student using their ID and displays their stored information.
+ - Returns true if the student exists and false if the ID cannot be found.
+ */
 bool SDB_ReadEntry(uint32 id){
     bool found = false;
     uint32 index;
@@ -161,6 +202,10 @@ bool SDB_ReadEntry(uint32 id){
     }
 }
 
+/*
+ - Retrieves the number of stored students and copies their IDs into the
+ - array provided by the caller.
+ */
 void  SDB_GetList(uint8 *count, uint32 *list){
     *count = counter;
     for(uint32 i = 0 ; i < counter ; i++){

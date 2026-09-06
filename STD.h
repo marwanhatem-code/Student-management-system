@@ -1,6 +1,12 @@
 #ifndef STD_H
 #define STD_H
 
+/*
+ - Defines standard data types used throughout the project.
+ - These types provide consistent and readable representations
+   for integers and boolean values.
+ */
+
 typedef unsigned char uint8;
 typedef char int8;
 typedef unsigned short uint16;
